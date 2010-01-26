@@ -63,8 +63,13 @@ class syntax_plugin_cumulus extends DokuWiki_Syntax_Plugin {
         $tagcloud = $this->_getTagXml($options);
 
         // add random seeds to so name and movie url to avoid collisions and force reloading (needed for IE)
-        $movie = '/lib/plugins/cumulus/tagcloud.swf?r='.rand(0,9999999);
-
+        $movie = 'cumulus/tagcloud.swf';
+        if (!file_exists(DOKU_PLUGIN.$movie)) {
+            $renderer->doc .= $this->getLang('filenotfound');
+            return true;
+        }
+        $movie = '/lib/plugins/'.$movie.'?r='.rand(0,9999999);
+        
         // write flash tag
         $params = array(
                 'allowScriptAccess'  => 'always' ,
