@@ -140,12 +140,12 @@ class syntax_plugin_cumulus extends DokuWiki_Syntax_Plugin {
                 $id = $word;
                 resolve_pageID($tag->namespace, $id, $exists);
                 if($exists) {
-                    $link = wl($id);
+                    $link = wl($id, '', true);
                     if($conf['useheading']) {
                         $name = p_get_first_heading($id, false);
                     }
                 } else {
-                    $link = wl($id, array('do'=>'showtag', 'tag'=>noNS($id)));
+                    $link = wl($id, array('do'=>'showtag', 'tag'=>noNS($id)), true);
                 }
                 $title = $id;
                 $class .= ($exists ? '_tag1' : '_tag2');
@@ -153,23 +153,23 @@ class syntax_plugin_cumulus extends DokuWiki_Syntax_Plugin {
             } elseif ($options['show'] == 'namespaces') {
                 $id ='';
                 resolve_pageID($word, $id, $exists);
-                $link = wl($id);
+                $link = wl($id, '', true);
                 $title = $id;
                 $size = 108;
                 $class = 'cloud5';
 
             } else {
                 if($conf['userewrite'] == 2) {
-                    $link = wl($word, array('do'=>'search', 'id'=>$word));
+                    $link = wl($word, array('do'=>'search', 'id'=>$word), true);
                     $title = $size;
                 } else {
-                    $link = wl($word, 'do=search');
+                    $link = wl($word, 'do=search', true);
                     $title = $size;
                 }
             }
 
             $fsize = 8 + round(($size-$min)/$delta);
-            $xmlCloude .= '<a href="' .DOKU_URL. $link . '" class="' . $class .'"' .' title="' . $title . '" style="font-size: '. $fsize .'pt;">' . $name . '</a>' . DOKU_LF;
+            $xmlCloude .= '<a href="' .$link . '" class="' . $class .'"' .' title="' . $title . '" style="font-size: '. $fsize .'pt;">' . $name . '</a>' . DOKU_LF;
         }
         return $xmlCloude;
     }
