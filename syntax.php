@@ -68,7 +68,7 @@ class syntax_plugin_cumulus extends DokuWiki_Syntax_Plugin {
             $renderer->doc .= $this->getLang('filenotfound');
             return true;
         }
-        $movie = '/lib/plugins/'.$movie.'?r='.rand(0,9999999);
+        $movie = DOKU_BASE.'lib/plugins/'.$movie.'?r='.rand(0,9999999);
         
         // write flash tag
         $params = array(
