@@ -169,7 +169,7 @@ class syntax_plugin_cumulus extends DokuWiki_Syntax_Plugin {
             }
 
             $fsize = 8 + round(($size-$min)/$delta);
-            $xmlCloude .= '<a href="' .$link . '" class="' . $class .'"' .' title="' . $title . '" style="font-size: '. $fsize .'pt;">' . $name . '</a>' . DOKU_LF;
+            $xmlCloude .= '<a href="' .$link . '" class="' . $class .'"' .' title="' . $title . '" style="font-size: '. $fsize .'pt;">' . hsc($name) . '</a>' . DOKU_LF;
         }
         return $xmlCloude;
     }
