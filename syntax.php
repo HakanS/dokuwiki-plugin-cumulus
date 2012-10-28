@@ -68,7 +68,7 @@ class syntax_plugin_cumulus extends DokuWiki_Syntax_Plugin {
             $renderer->doc .= $this->getLang('filenotfound');
             return true;
         }
-        $movie = '/lib/plugins/'.$movie.'?r='.rand(0,9999999);
+        $movie = DOKU_BASE.'lib/plugins/'.$movie.'?r='.rand(0,9999999);
         
         // write flash tag
         $params = array(
@@ -253,20 +253,7 @@ class syntax_plugin_cumulus extends DokuWiki_Syntax_Plugin {
      * (from DokuWiki Cloud plugin by Gina Häußge, Michael Klier, Esther Brunner)
      */
     function _getTagCloud($num, &$min, &$max, &$tag) {
-        $cloud = array();
-        if(!is_array($tag->topic_idx)) return;
-        foreach ($tag->topic_idx as $key => $value) {
-            if (!is_array($value) || empty($value) || (!trim($value[0]))) {
-                continue;
-            } else {
-                $pages = array();
-                foreach($value as $page) {
-                    if(auth_quickaclcheck($page) < AUTH_READ) continue;
-                    array_push($pages, $page);
-                }
-                if(!empty($pages)) $cloud[$key] = count($pages);
-            }
-        }
+        $cloud = $tag->tagOccurrences(NULL, NULL, true);
         return $this->_sortCloud($cloud, $num, $min, $max);
     }
 
