@@ -4,4 +4,4 @@ email  sandell.hakan@gmail.com
 date   2010-07-14
 name   Cumulus plugin
 desc   Plugin for displaying Flash movie navigation clouds
-url    http://github.com/HåkanS/dokuwiki-plugin-cumulus/zipball/master
+url    https://www.dokuwiki.org/plugin:cumulus
