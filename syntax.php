@@ -29,7 +29,7 @@ class syntax_plugin_cumulus extends DokuWiki_Syntax_Plugin {
         $this->Lexer->addSpecialPattern('~~\w*?CUMULUS.*?~~',$mode,'plugin_cumulus');
     }
 
-    function handle($match, $state, $pos, &$handler) {
+    function handle($match, $state, $pos, Doku_Handler $handler) {
         $flags = explode('&', substr($match, 2, -2));
         unset($flags[0]);
         foreach ($flags as $flag) {
@@ -39,7 +39,7 @@ class syntax_plugin_cumulus extends DokuWiki_Syntax_Plugin {
         return $data;
     }
 
-    function render($mode, &$renderer, $data) {
+    function render($mode, Doku_Renderer $renderer, $data) {
         if($mode != 'xhtml') return false;
 
         // prevent caching to ensure the included pages are always fresh
